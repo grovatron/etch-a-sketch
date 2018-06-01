@@ -5,3 +5,34 @@
     margin: 50px auto;
     border: 1px black solid;
 }
+
+.btn-container {
+    width: 500px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.btn {
+    width: 80px;
+    height: 25px;
+    display: inline-block;
+    line-height: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.reset {
+    background-color: #05c564;
+    border: 1px #05c564 solid;
+}
+
+.btn:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.reset:hover {
+    color: #05c564;
+}

@@ -1,4 +1,6 @@
 let container = document.querySelector('.container');
+let resetBtn = document.querySelector('.reset');
+resetBtn.addEventListener('click', resetGrid);
 let pixels = [];
 createGrid(16);
 
@@ -27,6 +29,9 @@ function createPixels(number) {
 }
 
 function createGrid(number) {
+    if (pixels.length !== 0) {
+        pixels.forEach(pixel => container.removeChild(pixel));
+    }
     let rule = createTemplateRule(number);
     container.style.gridTemplateColumns = rule;
     container.style.gridTemplateRows = rule;
@@ -36,4 +41,27 @@ function createGrid(number) {
 
 function makeGray(event) {
     this.style.backgroundColor = "#929795";
+}
+
+function resetGrid() {
+    if (pixels.length !== 0) {
+        pixels.forEach(pixel=>pixel.style.backgroundColor = 'white');
+    }
+    let number = getDimensions();
+    createGrid(number);
+}
+
+function getDimensions() {
+    let valid = false;
+    let number;
+    while (!valid) {
+        number = prompt('How many pixels per side?');
+        console.log(number);
+        if (!isNaN(number) && number > 0) {
+            valid = true;
+        } else {
+            alert('Please enter a number larger than 0');
+        }
+    }
+    return parseInt(number);
 }
