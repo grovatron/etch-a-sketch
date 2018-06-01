@@ -21,6 +21,7 @@ function createPixels(number) {
     for (let i = 0; i < Math.pow(number, 2); i++) {
         let pixel = document.createElement('div');
         pixel.style.border = '1px gray solid';
+        pixel.addEventListener('mouseover', makeGray);
         pixels.push(pixel);
     }
 }
@@ -31,4 +32,8 @@ function createGrid(number) {
     container.style.gridTemplateRows = rule;
     createPixels(number);
     pixels.forEach(pixel=>container.appendChild(pixel));
+}
+
+function makeGray(event) {
+    this.style.backgroundColor = "#929795";
 }
