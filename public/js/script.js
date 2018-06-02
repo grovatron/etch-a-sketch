@@ -1,8 +1,86 @@
 let container = document.querySelector('.container');
 let resetBtn = document.querySelector('.reset');
-resetBtn.addEventListener('click', resetGrid);
+let blackBtn = document.querySelector('.black');
+let colorBtn = document.querySelector('.color');
+let shadeBtn = document.querySelector('.shade');
+let randColor = getRandomColor();
+
+let blackMode = true;
+let shadeMode = false;
+let randMode = false;
+
+colorBtn.style.backgroundColor = randColor;
+colorBtn.style.border = `1px ${randColor} solid`;
+
 let pixels = [];
 createGrid(16);
+
+resetBtn.addEventListener('click', resetGrid);
+blackBtn.addEventListener('click', setMode);
+colorBtn.addEventListener('mouseover', btnHover);
+colorBtn.addEventListener('mouseout', btnUnhover);
+colorBtn.addEventListener('click', setMode);
+colorBtn.addEventListener('click', changeColors);
+shadeBtn.addEventListener('click', setMode);
+
+function btnHover(event) {
+    this.style.backgroundColor = '#FFF';
+    this.style.color = randColor;
+}
+
+function btnUnhover(event) {
+    this.style.backgroundColor = randColor;
+    this.style.color = '#FFF';
+}
+
+function changeColors() {
+    randColor = getRandomColor();
+    colorBtn.style.color = randColor;
+    colorBtn.style.border = `1px ${randColor} solid`;
+}
+
+function removeBlack() {
+    pixels.forEach(pixel => pixel.removeEventListener('mouseover', makeBlack));
+}
+
+function removeShade() {
+    pixels.forEach(pixel => pixel.removeEventListener('mouseover', shadePixel));
+}
+
+function removeRand() {
+    pixels.forEach(pixel => pixel.removeEventListener('mouseover', makeRandomColor));
+}
+
+function addBlack() {
+    pixels.forEach(pixel => pixel.addEventListener('mouseover', makeBlack));
+}
+
+function addShade() {
+    pixels.forEach(pixel => pixel.addEventListener('mouseover', shadePixel));
+}
+
+function addRand() {
+    pixels.forEach(pixel => pixel.addEventListener('mouseover', makeRandomColor));
+}
+
+function setMode(event) {
+    removeBlack();
+    removeShade();
+    removeRand();
+    blackMode = false;
+    shadeMode = false;
+    randMode = false;
+    if (this.className.includes('black')) {
+        addBlack();
+        blackMode = true;
+    } else if (this.className.includes('shade')) {
+        addShade();
+        shadeMode = true;
+    } else {
+        addRand();
+        randMode = true;
+    }
+}
 
 function createTemplateRule(number) {
     let rule = ""
@@ -23,7 +101,13 @@ function createPixels(number) {
     for (let i = 0; i < Math.pow(number, 2); i++) {
         let pixel = document.createElement('div');
         pixel.style.border = '1px gray solid';
-        pixel.addEventListener('mouseover', shadePixel);
+        if (blackMode) {
+            addBlack();
+        } else if (shadeMode) {
+            addShade();
+        } else {
+            addRand();
+        }
         pixels.push(pixel);
     }
 }

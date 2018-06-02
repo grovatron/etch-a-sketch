@@ -15,17 +15,28 @@
 }
 
 .btn {
-    width: 80px;
+    width: 100px;
     height: 25px;
     display: inline-block;
     line-height: 25px;
     font-weight: bold;
     color: white;
+    margin: 0 5px;
 }
 
 .reset {
     background-color: #05c564;
     border: 1px #05c564 solid;
+}
+
+.black {
+    background-color: #000;
+    border: 1px #000 solid;
+}
+
+.shade {
+    background: linear-gradient(to right, #FFF, #000);
+    border: 1px gray solid;
 }
 
 .btn:hover {
@@ -35,4 +46,12 @@
 
 .reset:hover {
     color: #05c564;
+}
+
+.black:hover {
+    color: #000;
+}
+
+.shade:hover {
+    background: linear-gradient(to left, #FFF, #000);
 }
