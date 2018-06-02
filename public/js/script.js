@@ -102,11 +102,11 @@ function createPixels(number) {
         let pixel = document.createElement('div');
         pixel.style.border = '1px gray solid';
         if (blackMode) {
-            addBlack();
+            pixel.addEventListener('mouseover', makeBlack);
         } else if (shadeMode) {
-            addShade();
+            pixel.addEventListener('mouseover', shadePixel);
         } else {
-            addRand();
+            pixel.addEventListener('mouseover', makeRandomColor);
         }
         pixels.push(pixel);
     }
